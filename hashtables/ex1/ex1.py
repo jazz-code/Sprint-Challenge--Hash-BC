@@ -12,12 +12,24 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     YOUR CODE HERE
     """
+    # itterate over arr elements
+    for i in range(length):
+        # key = difference between limit and current weight
+        key = limit - weights[i]
+        # current weight in storage
+        storage = hash_table_retrieve(ht, key)
 
-    return None
-
+        # if nothing in storage, insert
+        if storage is None:
+            hash_table_insert(ht, weights[i], i)
+        else:
+            return (i, storage)
 
 def print_answer(answer):
     if answer is not None:
         print(str(answer[0] + " " + answer[1]))
     else:
         print("None")
+
+
+weights_2 = [4, 4]
