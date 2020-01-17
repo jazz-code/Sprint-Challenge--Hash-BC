@@ -30,15 +30,19 @@ def reconstruct_trip(tickets, length):
         # if i.source = "NONE":
 
         # insert ticket to hashtable
-        # hash_table_insert(hashtable, i.source, i.destination)
+        hash_table_insert(hashtable, i.source, i.destination)
 
         if i.source == "NONE":
         #     hash_table_retrieve(hashtable, i.source)
             # print(hash_table_retrieve(hashtable, i.source))
             # route[index] (hash_table_retrieve(hashtable, i.source))
             route[index] = i.destination
+            # print(route[index])
             index += 1
-    return route
+        while index < length:
+            route[index] = hash_table_retrieve(hashtable, route[index])
+            index += 1
+        return route
 
 
 ticket_1 = Ticket("NONE", "PDX")
