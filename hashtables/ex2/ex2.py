@@ -24,9 +24,28 @@ def reconstruct_trip(tickets, length):
     """
     YOUR CODE HERE
     """
+    index = 0
     # for every ticket
     for i in tickets:
-        # insert ticket to hashtable
-        hash_table_insert(hash_table, i.source, i.destination)
+        # if i.source = "NONE":
 
+        # insert ticket to hashtable
+        # hash_table_insert(hashtable, i.source, i.destination)
+
+        if i.source == "NONE":
+        #     hash_table_retrieve(hashtable, i.source)
+            # print(hash_table_retrieve(hashtable, i.source))
+            # route[index] (hash_table_retrieve(hashtable, i.source))
+            route[index] = i.destination
+            index += 1
     return route
+
+
+ticket_1 = Ticket("NONE", "PDX")
+ticket_2 = Ticket("PDX", "DCA")
+ticket_3 = Ticket("DCA", "NONE")
+
+tickets = [ticket_1, ticket_2, ticket_3]
+
+# expected = ["PDX", "DCA", "NONE"]
+print(reconstruct_trip(tickets, 3))
