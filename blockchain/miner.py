@@ -23,7 +23,8 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    proof = random.randint(0, 999999)
+    # proof = random.randint(0, 999999)
+    proof = 838387
     #  TODO: Your code here
     encode_proof = f'{last_proof}'.encode()
     last_hash = hashlib.sha256(encode_proof).hexdigest()
