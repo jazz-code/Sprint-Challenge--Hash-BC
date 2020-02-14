@@ -23,7 +23,7 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    proof = random.randint(0, 999999)
+    proof = 9999
     #  TODO: Your code here
     encode_proof = f'{last_proof}'.encode()
     last_hash = hashlib.sha256(encode_proof).hexdigest()
@@ -45,7 +45,7 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    guess = (f'{proof}'.encode())
+    guess = f'{proof}'.encode()
     last_hash = hashlib.sha256(guess).hexdigest()
      # look up slicing
     return last_hash[-6:] == guess[:6]
