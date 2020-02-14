@@ -22,17 +22,16 @@ def proof_of_work(last_proof):
 
     start = timer()
 
-    print("Searching for next proof")
-    # proof = random.randint(0, 999999)
-    proof = 838387
-    #  TODO: Your code here
-    encode_proof = f'{last_proof}'.encode()
-    last_hash = hashlib.sha256(encode_proof).hexdigest()
+    print("Searching for next proof..")
+    proof = random.randint(0, 999999)
+
+    last = f"{last_proof}".encode()
+    last_hash = hashlib.sha256(last).hexdigest()
 
     while valid_proof(last_hash, proof) is False:
-        proof += 1
+            proof += 1
 
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    print(f"Proof found: {proof} in {timer() - start:.3f}s")
     return proof
 
 
@@ -41,23 +40,19 @@ def valid_proof(last_hash, proof):
     Validates the Proof:  Multi-ouroborus:  Do the last six characters of
     the hash of the last proof match the first six characters of the hash
     of the new proof?
-
     IE:  last_hash: ...AE9123456, new hash 123456E88...
     """
+    guess = f"{proof}".encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
 
-    # TODO: Your code here!
-    guess = f'{proof}'.encode()
-    last_hash = hashlib.sha256(guess).hexdigest()
-     # look up slicing
-    return last_hash[-6:] == guess[:6]
-
+    return last_hash[-6:] == guess_hash[:6]
 
 if __name__ == '__main__':
     # What node are we interacting with?
     if len(sys.argv) > 1:
         node = sys.argv[1]
     else:
-        node = "https://lambda-coin.herokuapp.com/api"
+        node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
