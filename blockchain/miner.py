@@ -22,11 +22,16 @@ def proof_of_work(last_proof):
 
     start = timer()
 
-    print("Searching for next proof")
-    proof = 0
-    #  TODO: Your code here
+    print("Searching for next proof..")
+    proof = random.randint(0, 999999)
 
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    last = f"{last_proof}".encode()
+    last_hash = hashlib.sha256(last).hexdigest()
+
+    while valid_proof(last_hash, proof) is False:
+            proof += 1
+
+    print(f"Proof found: {proof} in {timer() - start:.3f}s")
     return proof
 
 
@@ -35,20 +40,19 @@ def valid_proof(last_hash, proof):
     Validates the Proof:  Multi-ouroborus:  Do the last six characters of
     the hash of the last proof match the first six characters of the hash
     of the new proof?
-
     IE:  last_hash: ...AE9123456, new hash 123456E88...
     """
+    guess = f"{proof}".encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
 
-    # TODO: Your code here!
-    pass
-
+    return last_hash[-6:] == guess_hash[:6]
 
 if __name__ == '__main__':
     # What node are we interacting with?
     if len(sys.argv) > 1:
         node = sys.argv[1]
     else:
-        node = "https://lambda-coin.herokuapp.com/api"
+        node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
